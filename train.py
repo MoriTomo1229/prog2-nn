@@ -86,15 +86,15 @@ for epoch in range(n_epochs):
 
 
 plt.subplot(1, 2, 1)
-plt.plot(range(1, n_epochs+1), train_loss_log)
-plt.xticks(range(1, n_epochs+1))
+plt.plot(range(1, n_epochs + 1), train_loss_log)
+plt.xticks(range(1, n_epochs + 1))
 plt.xlabel('epochs')
 plt.ylabel('loss')
 plt.grid()
 
 plt.subplot(1, 2, 2)
-plt.plot(range(1, n_epochs+1), val_acc_log)
-plt.xticks(range(1, n_epochs+1))
+plt.plot(range(1, n_epochs + 1), val_acc_log)
+plt.xticks(range(1, n_epochs + 1))
 plt.xlabel('epochs')
 plt.ylabel('accuracy')
 plt.grid()
