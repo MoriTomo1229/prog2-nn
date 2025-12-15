@@ -63,7 +63,7 @@ for epoch in range(n_epochs):
     time_start = time.time()
     time_loss = models.train(model, dataloader_train, loss_fm, optimizer)
     time_end = time.time()
-    print(f'        training loss:  {time_loss:.f3f} ({time_end-time_start}s)')
+    print(f'        training loss:  {time_loss:.f3f} ({time_end-time_start:.3f}s)')
 
     train_loss_log.append(time_loss)
 
