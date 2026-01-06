@@ -41,8 +41,14 @@ dataloader_test = torch.utils.data.DataLoader(
 #     print(label_batch.shape)
 #     break
 
-model = models.MyModel()
+# GPUかCPUかを自動敵に選ぶ
+device = 'cuda' if torch.cuda.is_available() else 'cpu'
+print(f'Using device: {device}')
 
+# モデルのインスタンスを作る
+model = models.MyModel()
+# 選んだモデルをデバイスに転送する
+model.to(device)
 # acc_test = models.MyModel.test_accuracy(model, dataloader_test)
 # print(f'test accuracy:{acc_test*100:.3f}%')
 loss_fm = torch.nn.CrossEntropyLoss()
