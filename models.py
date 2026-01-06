@@ -43,9 +43,14 @@ def test_accuracy(model, dataloader):
 
 def train(model, dataloader, loss_fn, optimizer):
     """1 epochの学習を行う"""
+    # モデルのデバイスを調べる
+    device = next(model.parameters()).device
     model.train()
     last_loss = None
     for image_batch, label_batch in dataloader:
+        # バッチをmodelと同じデバイスに転送する
+        image_batch = image_batch.to(device)
+        label_batch = label_batch.to(device)
         logits_batch = model(image_batch)
         loss = loss_fn(logits_batch, label_batch)
         optimizer.zero_grad()
@@ -59,8 +64,13 @@ def test(model, dataloader, loss_fn):
     """1エポック分のロスを計算"""
     model.eval()
     loss_total = 0.0
+    # モデルのデバイスを調べる
+    device = next(model.parameters()).device
     with torch.no_grad():
         for image_batch, label_batch in dataloader:
+            # バッチをmodelと同じデバイスに転送する
+            image_batch = image_batch.to(device)
+            label_batch = label_batch.to(device)
             logits_batch = model(image_batch)
             loss = loss_fn(logits_batch, label_batch)
             loss_total += loss.item()
