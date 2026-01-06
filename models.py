@@ -22,10 +22,17 @@ class MyModel(nn.Module):
 
 
 def test_accuracy(model, dataloader):
-    n_corrects = 0
+    # 全てのミニバッチに対して推論をし、正解率を計算する
+    n_corrects = 0  # 正解の個数
+    device = next(model.parameters()).device
+
     model.eval()
     with torch.no_grad():
         for image_batch, label_batch in dataloader:
+            # バッチをmodelと同じデバイスに転送する
+            image_batch = image_batch.to(device)
+            label_batch = label_batch.to(device)
+            # モデルに入れて結果logitsをだす
             logits_batch = model(image_batch)
             predict_batch = logits_batch.argmax(dim=1)
             n_corrects += (predict_batch == label_batch).sum().item()
