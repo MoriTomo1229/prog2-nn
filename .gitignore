@@ -1,3 +1,6 @@
 __pycache__/
 /data/
 /datasets/
+
+fashion_cnn_epoch*.pt
+events.out.tfevents.*

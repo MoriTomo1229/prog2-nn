@@ -51,10 +51,11 @@ def train(model, dataloader, loss_fn, optimizer):
 def test(model, dataloader, loss_fn):
     """1エポック分のロスを計算"""
     model.eval()
+    loss_total = 0.0
     with torch.no_grad():
         for image_batch, label_batch in dataloader:
             logits_batch = model(image_batch)
             loss = loss_fn(logits_batch, label_batch)
-            loss_total = loss.item()
+            loss_total += loss.item()
 
     return loss_total / len(dataloader)
